@@ -1,0 +1,3 @@
+bucket = "gcpdemo3000-tf-state"
+prefix = "static.tfstate.d"
+impersonate_service_account = "sa-gcpdemo3000-tf@our-bruin-382403.iam.gserviceaccount.com"
