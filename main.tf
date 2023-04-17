@@ -59,7 +59,7 @@ resource "google_compute_instance" "vm1" {
                     #! /bin/bash
                     apt-get update
                     apt-get install apache2 -y
-                    echo "Page served from: US-EAST1" | tee /var/www/html/index.html
+                    echo "Pagina Servida desde Estados Unidos" | tee /var/www/html/index.html
                     systemctl restart apache2"
                     EOF
  }
@@ -91,7 +91,7 @@ resource "google_compute_instance" "vm2" {
                     #! /bin/bash
                     apt-get update
                     apt-get install apache2 -y
-                    echo "Page served from: EU-WEST" | tee /var/www/html/index.html
+                    echo "Pagina Servida desde Alemania" | tee /var/www/html/index.html
                     systemctl restart apache2"
                     EOF
  }
@@ -177,44 +177,44 @@ resource "google_compute_global_forwarding_rule" "default" {
 
 // Test vms
 
-resource "google_compute_instance" "vm3" {
-  name         = "testvm1"
-  machine_type = "e2-medium"
-  zone         = "us-west2-a"
-  tags = ["uservm"]
-
-  boot_disk {
-    initialize_params {
-      image = "debian-cloud/debian-11"
-      labels = {
-        my_label = "value"
-      }
-    }
-  }
-  network_interface {
-    network = "default"
-    # access_config {
-    # }
-  }
-}
-
-resource "google_compute_instance" "vm4" {
-  name         = "testvm2"
-  machine_type = "e2-medium"
-  zone         = "europe-west3-c"
-  tags = ["uservm"]
-
-  boot_disk {
-    initialize_params {
-      image = "debian-cloud/debian-11"
-      labels = {
-        my_label = "value"
-      }
-    }
-  }
-  network_interface {
-    network = "default"
-    # access_config {
-    # }
-  }
-}
+# resource "google_compute_instance" "vm3" {
+#   name         = "testvm1"
+#   machine_type = "e2-medium"
+#   zone         = "us-west2-a"
+#   tags = ["uservm"]
+#
+#   boot_disk {
+#     initialize_params {
+#       image = "debian-cloud/debian-11"
+#       labels = {
+#         my_label = "value"
+#       }
+#     }
+#   }
+#   network_interface {
+#     network = "default"
+#     # access_config {
+#     # }
+#   }
+# }
+#
+# resource "google_compute_instance" "vm4" {
+#   name         = "testvm2"
+#   machine_type = "e2-medium"
+#   zone         = "europe-west3-c"
+#   tags = ["uservm"]
+#
+#   boot_disk {
+#     initialize_params {
+#       image = "debian-cloud/debian-11"
+#       labels = {
+#         my_label = "value"
+#       }
+#     }
+#   }
+#   network_interface {
+#     network = "default"
+#     # access_config {
+#     # }
+#   }
+# }
