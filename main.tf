@@ -57,10 +57,10 @@ resource "google_compute_instance" "vm1" {
   metadata ={
   startup-script = <<-EOF
                     #! /bin/bash
-                    apt-get update
-                    apt-get install apache2 -y
-                    echo "Pagina Servida desde Estados Unidos" | tee /var/www/html/index.html
-                    systemctl restart apache2"
+                    sudo apt-get update
+                    sudo apt-get install apache2 -y
+                    echo '<!doctype html><html><body><h1>Hola desde USA</h1></body></html>' | sudo tee /var/www/html/index.html
+                    sudo systemctl restart apache2
                     EOF
  }
 }
@@ -89,10 +89,10 @@ resource "google_compute_instance" "vm2" {
   metadata ={
   startup-script = <<-EOF
                     #! /bin/bash
-                    apt-get update
-                    apt-get install apache2 -y
-                    echo "Pagina Servida desde Alemania" | tee /var/www/html/index.html
-                    systemctl restart apache2"
+                    sudo apt-get update
+                    sudo apt-get install apache2 -y
+                    echo '<!doctype html><html><body><h1>Hola desde Alemania</h1></body></html>' | sudo tee /var/www/html/index.html
+                    sudo systemctl restart apache2
                     EOF
  }
 }
