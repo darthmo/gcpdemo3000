@@ -103,7 +103,7 @@ resource "google_compute_instance_group" "webserver-us" {
   name        = "us-webserver-instance-group"
 
   instances = [
-    google_compute_instance.vm1.id,
+    google_compute_instance.vm1.self_link,
   ]
   zone = "us-central1-a"
   named_port {
@@ -116,7 +116,7 @@ resource "google_compute_instance_group" "webserver-eu" {
   name        = "eu-webserver-instance-group"
 
   instances = [
-    google_compute_instance.vm2.id,
+    google_compute_instance.vm2.self_link,
   ]
   zone = "europe-west3-a"
   named_port {
