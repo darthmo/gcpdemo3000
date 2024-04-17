@@ -97,13 +97,45 @@ resource "google_compute_instance" "vm2" {
  }
 }
 
+resource "google_compute_instance" "vm3" {
+  name         = "webserver-us2"
+  machine_type = "e2-medium"
+  zone         = "us-central1-a"
+  tags = ["web-server",
+          "http-server",
+          "https-server"]
+
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-11"
+      labels = {
+        my_label = "value"
+      }
+    }
+  }
+  network_interface {
+    network = "default"
+    access_config {
+    }
+  }
+  metadata ={
+  startup-script = <<-EOF
+                    #! /bin/bash
+                    sudo apt-get update
+                    sudo apt-get install apache2 -y
+                    echo '<!doctype html><html><body><h1>Hola desde USA Server 2</h1></body></html>' | sudo tee /var/www/html/index.html
+                    sudo systemctl restart apache2
+                    EOF
+ }
+}
+
 //Instance groups
 
 resource "google_compute_instance_group" "webserver-us" {
   name        = "us-webserver-instance-group"
 
   instances = [
-    google_compute_instance.vm1.self_link,
+    google_compute_instance.vm1.self_link,google_compute_instance.vm3.self_link,
   ]
   zone = "us-central1-a"
   named_port {
